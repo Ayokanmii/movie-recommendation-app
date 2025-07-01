@@ -1,0 +1,1 @@
+{ "name": "frontend", "dependencies": { "react": "*", "react-dom": "*", "react-router-dom": "*", "axios": "*" } }
