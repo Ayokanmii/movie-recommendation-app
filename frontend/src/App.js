@@ -1,13 +1,15 @@
-import AIRecommendations from "./pages/AIRecommendations";
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
+import AIRecommendations from "./pages/AIRecommendations";
 
-function App() {
+function HomePage() {
   return (
     <div className="app">
       <header className="header">
         <h1>Damilola Movie Finder 🎬</h1>
         <p>Discover trending movies, search by title, and manage your personal watchlist.</p>
+        <p><Link to="/ai-recommendations" className="ai-link">👉 Try AI Movie Recommender</Link></p>
       </header>
 
       <section className="features">
@@ -35,6 +37,17 @@ function App() {
         <p>LinkedIn: <a href="https://linkedin.com/in/olatunjiayokanmi" target="_blank" rel="noopener noreferrer">View Profile</a></p>
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/ai-recommendations" element={<AIRecommendations />} />
+      </Routes>
+    </Router>
   );
 }
 
