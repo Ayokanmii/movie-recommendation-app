@@ -1,51 +1,47 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
+import './AIRecommendations.css';
 
-const AIRecommendations = () => {
-  const [genre, setGenre] = useState("");
-  const [recommendations, setRecommendations] = useState([]);
+function AIRecommendations() {
+  const [input, setInput] = useState('');
+  const [recommendation, setRecommendation] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleRecommend = async () => {
-    setLoading(true);
+  const getRecommendation = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/ai/recommend`,
-        { genre }
-      );
-      setRecommendations(response.data.recommendations || []);
+      setLoading(true);
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/ai/recommend`, { input });
+      setRecommendation(res.data.recommendation);
     } catch (error) {
-      console.error("Recommendation error:", error);
-      setRecommendations([]);
+      setRecommendation("Sorry, something went wrong.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="app">
-      <h2>🎬 AI Movie Recommender</h2>
-      <p>Enter a genre (e.g., comedy, sci-fi, action) and let AI suggest great movies for you!</p>
+    <div className="ai-page">
+      <h2>🎯 AI Movie Recommender</h2>
+      <p>Enter a movie or your mood, and let our AI suggest something for you!</p>
+
       <input
         type="text"
-        value={genre}
-        onChange={(e) => setGenre(e.target.value)}
-        placeholder="Enter movie genre"
+        placeholder="e.g. I want a romantic comedy..."
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
       />
-      <button onClick={handleRecommend} disabled={loading}>
-        {loading ? "Loading..." : "Get Recommendations"}
+      <button onClick={getRecommendation} disabled={loading}>
+        {loading ? "Thinking..." : "Get Recommendation"}
       </button>
 
-      <div className="results">
-        <h3>Recommended Movies:</h3>
-        <ul>
-          {recommendations.map((movie, index) => (
-            <li key={index}>🎥 {movie}</li>
-          ))}
-        </ul>
-      </div>
+      {recommendation && (
+        <div className="result">
+          <h3>AI Suggests:</h3>
+          <p>{recommendation}</p>
+        </div>
+      )}
     </div>
   );
-};
+}
 
 export default AIRecommendations;
