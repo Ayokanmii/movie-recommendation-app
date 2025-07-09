@@ -12,7 +12,7 @@ function AIRecommendations() {
     setError("");
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/ai/recommend`,
+      `${process.env.REACT_APP_API_URL}/api/ai/recommend`
         { prompt }
       );
       setRecommendations(response.data.recommendations);
