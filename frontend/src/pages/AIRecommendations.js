@@ -1,63 +1,52 @@
 import React, { useState } from "react";
-import "./AIRecommendations.css"; // Optional: For custom styling
+import axios from "axios";
 
-const AIRecommendations = () => {
-  const [preferences, setPreferences] = useState("");
-  const [recommendations, setRecommendations] = useState([]);
+function AIRecommendations() {
+  const [prompt, setPrompt] = useState("");
+  const [recommendations, setRecommendations] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleRecommend = async () => {
     setLoading(true);
-    setRecommendations([]);
-
+    setError("");
     try {
-      const response = await fetch("https://your-backend-url/api/ai/recommend", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ preferences }),
-      });
-
-      const data = await response.json();
-      setRecommendations(data.recommendations || []);
-    } catch (error) {
-      console.error("Error fetching recommendations:", error);
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/ai/recommend`,
+        { prompt }
+      );
+      setRecommendations(response.data.recommendations);
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
-    <div className="ai-recommender">
+    <div style={{ padding: "2rem", fontFamily: "Arial" }}>
       <h2>🎥 AI Movie Recommender</h2>
-      <p>Describe what kind of movies you like and get smart suggestions!</p>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          placeholder="e.g. romantic comedies, sci-fi thrillers, superhero movies..."
-          value={preferences}
-          onChange={(e) => setPreferences(e.target.value)}
-          rows={4}
-          required
-        ></textarea>
-        <button type="submit" disabled={loading}>
-          {loading ? "Recommending..." : "Get Recommendations"}
-        </button>
-      </form>
+      <p>Get smart movie suggestions powered by AI.</p>
+      <textarea
+        value={prompt}
+        onChange={(e) => setPrompt(e.target.value)}
+        placeholder="e.g. Recommend 5 comedy movies like The Hangover"
+        rows="4"
+        style={{ width: "100%", marginBottom: "1rem", padding: "0.5rem" }}
+      />
+      <button onClick={handleRecommend} disabled={loading}>
+        {loading ? "Loading..." : "Get Recommendations"}
+      </button>
 
-      {recommendations.length > 0 && (
-        <div className="results">
-          <h3>Recommended Movies:</h3>
-          <ul>
-            {recommendations.map((movie, index) => (
-              <li key={index}>{movie}</li>
-            ))}
-          </ul>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {recommendations && (
+        <div style={{ marginTop: "1rem", whiteSpace: "pre-wrap" }}>
+          <strong>📋 Results:</strong>
+          <p>{recommendations}</p>
         </div>
       )}
     </div>
   );
-};
+}
 
 export default AIRecommendations;
