@@ -55,3 +55,18 @@ a {
   margin-bottom: 0.5rem;
   list-style-type: disc;
 }
+
+.navbar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
