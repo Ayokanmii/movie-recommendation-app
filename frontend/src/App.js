@@ -1,3 +1,4 @@
+import AIRecommendations from "./pages/AIRecommendations";
 import React from 'react';
 import './App.css';
 
