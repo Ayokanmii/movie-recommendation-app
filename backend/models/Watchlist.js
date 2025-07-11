@@ -1,10 +1,23 @@
+import { DataTypes } from 'sequelize';
 
-module.exports = (sequelize, DataTypes) => {
-  const Watchlist = sequelize.define('Watchlist', {
-    userId: DataTypes.INTEGER,
-    movieId: DataTypes.STRING,
-    title: DataTypes.STRING,
-    poster: DataTypes.STRING
+const Watchlist = (sequelize) => {
+  return sequelize.define('Watchlist', {
+    userId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    movieId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    posterPath: {
+      type: DataTypes.STRING,
+    },
   });
-  return Watchlist;
 };
+
+export default Watchlist;

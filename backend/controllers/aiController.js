@@ -1,29 +1,31 @@
-// controllers/aiController.js
-const axios = require("axios");
+import axios from "axios";
 
-const getAIRecommendations = async (req, res) => {
+export const getAIRecommendations = async (req, res) => {
   const { mood, genre } = req.body;
 
   try {
-    // Sample mock AI logic – you can replace with OpenAI call
-    const recommendations = [
+    const prompt = `Suggest 3 family-friendly movies for someone in the mood for '${mood}' and likes '${genre}' genre. Include title and a short description for each.`;
+
+    const response = await axios.post(
+      "https://openrouter.ai/api/v1/chat/completions",
       {
-        title: "The Matrix",
-        genre: "Sci-Fi",
-        description: "A hacker discovers the shocking truth about reality."
+        model: "openrouter/auto", // ✅ uses auto-router
+        messages: [{ role: "user", content: prompt }],
+        max_tokens: 300            // ✅ prevents free account token overflow
       },
       {
-        title: "Inside Out",
-        genre: "Animation",
-        description: "Explore emotions through the mind of a young girl."
+        headers: {
+          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "Content-Type": "application/json"
+        }
       }
-    ];
+    );
 
-    res.json({ success: true, recommendations });
+    const aiMessage = response.data.choices[0].message.content;
+
+    res.json({ success: true, recommendations: aiMessage });
   } catch (err) {
-    console.error("AI Recommender Error:", err.message);
+    console.error("❌ AI Recommender Error:", err.response?.data || err.message);
     res.status(500).json({ success: false, message: "AI recommendation failed." });
   }
 };
-
-module.exports = { getAIRecommendations };

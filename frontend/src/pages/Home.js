@@ -1,23 +1,21 @@
- import React from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Home.css';
 
 function Home() {
   return (
-    <div>
-      <header className="header">
-        <h1>Damilola Movie Finder 🎬</h1>
-        <p>Discover trending movies, search by title, and manage your personal watchlist.</p>
-      </header>
+    <div className="home-page">
+      <img src="/logo.png" alt="WatchWise Logo" className="logo" />
 
-      <section className="features">
-        <h2>✨ Key Features</h2>
-        <ul>
-          <li>🔍 Search movies by name using the TMDb API</li>
-          <li>📃 View detailed movie info</li>
-          <li>💾 Add/remove movies from your personal watchlist</li>
-          <li>🔐 Secure login/register</li>
-          <li>🤖 AI-based movie recommendations</li>
-        </ul>
-      </section>
+      <h1>🎬 Welcome to WatchWise</h1>
+      <p>Explore, discover, and save your favorite movies with AI-powered recommendations.</p>
+
+      <div className="nav-buttons">
+        <Link to="/login">Login</Link>
+        <Link to="/register">Register</Link>
+        <Link to="/ai">AI Recommender</Link>
+        <Link to="/watchlist">Watchlist</Link>
+      </div>
     </div>
   );
 }

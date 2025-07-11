@@ -1,14 +1,55 @@
+/* ===== App.css for WatchWise ===== */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #f0f0f0;
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+
 .app {
-  font-family: Arial, sans-serif;
-  max-width: 800px;
+  max-width: 1000px;
   margin: auto;
   padding: 2rem;
-  background-color: #f9f9f9;
-  color: #333;
 }
 
 .header h1 {
-  color: #2c3e50;
+  color: #ffffff;
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: #cccccc;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.ai-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  background-color: #e50914;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.ai-link:hover {
+  background-color: #b81d24;
+}
+
+section {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  margin-top: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .features ul {
@@ -18,55 +59,37 @@
 
 .features li::before {
   content: "🎬 ";
+  margin-right: 0.5rem;
 }
 
 a {
-  color: #007bff;
+  color: #1db954;
   text-decoration: none;
 }
 
-.recommendation-section {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background-color: #fff8e1;
-  border: 1px solid #ffe082;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+a:hover {
+  color: #ffffff;
 }
 
-.recommendation-section h2 {
-  font-size: 1.6rem;
-  color: #f57c00;
-  margin-bottom: 1rem;
+footer.contact {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 3rem;
+  color: #aaaaaa;
 }
 
-.recommendation-section p {
-  font-size: 1rem;
-  color: #444;
-  margin-bottom: 0.5rem;
-}
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2rem;
+  }
 
-.recommendation-section ul {
-  padding-left: 1.2rem;
-  margin-top: 1rem;
-}
+  .app {
+    padding: 1rem;
+  }
 
-.recommendation-section li {
-  margin-bottom: 0.5rem;
-  list-style-type: disc;
-}
-
-.navbar {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  background-color: #f0f0f0;
-  padding: 1rem;
-  border-radius: 8px;
-}
-
-.navbar a {
-  text-decoration: none;
-  color: #007bff;
-  font-weight: bold;
+  .ai-link {
+    display: block;
+    text-align: center;
+    margin: 1rem auto;
+  }
 }

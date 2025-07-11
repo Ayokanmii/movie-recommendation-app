@@ -1,27 +1,20 @@
-const express = require('express');
-const app = express();
-const cors = require('cors');
-const dotenv = require('dotenv');
-const { Sequelize, DataTypes } = require('sequelize');
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import './models/index.js'; // Automatically runs DB connection
+
+import authRoutes from './routes/auth.js';
+import watchlistRoutes from './routes/watchlist.js';
+import aiRoutes from './routes/ai.js';
 
 dotenv.config();
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'postgres',
-  logging: false
-});
-
-const authRoutes = require('./routes/auth');
-const watchlistRoutes = require('./routes/watchlist');
-const aiRoutes = require('./routes/ai'); // 👈 NEW
-
+const app = express();
 app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/watchlist', watchlistRoutes);
-app.use('/api/ai', aiRoutes); // 👈 NEW
+app.use('/api/ai', aiRoutes);
 
-sequelize.authenticate().then(() => console.log('Database connected'));
-
-app.listen(5000, () => console.log('Server running on port 5000'));
+app.listen(5000, () => console.log('🚀 Server running on port 5000'));
