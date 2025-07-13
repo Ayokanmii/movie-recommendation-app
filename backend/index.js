@@ -1,7 +1,8 @@
+// index.js
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import './models/index.js'; // Automatically runs DB connection
+import './models/index.js'; // This auto-connects DB and models
 
 import authRoutes from './routes/auth.js';
 import watchlistRoutes from './routes/watchlist.js';
@@ -17,4 +18,5 @@ app.use('/api/auth', authRoutes);
 app.use('/api/watchlist', watchlistRoutes);
 app.use('/api/ai', aiRoutes);
 
-app.listen(5000, () => console.log('🚀 Server running on port 5000'));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

@@ -1,0 +1,88 @@
+.auth-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #1c1c1e, #121212);
+  color: #f5f5f7;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.auth-box {
+  background: #1e1e1e;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.auth-box h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.auth-box input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background: #2a2a2a;
+  color: #f5f5f7;
+  font-size: 1rem;
+}
+
+.auth-box input::placeholder {
+  color: #aaa;
+}
+
+.auth-box button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #ff4c4c;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.auth-box button:hover {
+  background-color: #e33c3c;
+}
+
+.auth-box p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.auth-box a {
+  color: #ff4c4c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-box a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .auth-box {
+    padding: 1.5rem;
+  }
+
+  .auth-box h2 {
+    font-size: 1.5rem;
+  }
+
+  .auth-box button {
+    font-size: 0.9rem;
+  }
+}

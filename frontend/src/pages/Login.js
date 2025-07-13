@@ -1,45 +1,63 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import './Auth.css';
+import { Link, useNavigate } from 'react-router-dom';
+import './Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setMessage('');
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, { email, password });
-      localStorage.setItem('token', res.data.token);
-      setMessage('✅ Login successful');
+      setError('');
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Login failed');
+
+      localStorage.setItem('token', data.token);
+      navigate('/ai');
     } catch (err) {
-      setMessage('❌ Login failed: ' + (err.response?.data?.message || 'Something went wrong'));
+      setError(err.message);
     }
   };
 
   return (
-    <div className="auth-container">
-      <h2>🔐 Sign in with Email</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="auth-page">
+      <div className="auth-box">
+        <h2>Login</h2>
+        {error && <p className="error">{error}</p>}
+
         <input
           type="email"
-          placeholder="Enter email"
+          placeholder="Email"
           value={email}
-          onChange={e => setEmail(e.target.value)}
-          required
+          onChange={(e) => setEmail(e.target.value)}
         />
+
         <input
           type="password"
-          placeholder="Enter password"
+          placeholder="Password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
-      </form>
-      {message && <p className="status-message">{message}</p>}
+
+        <div className="forgot-password">
+          <Link to="/forgot-password">Forgot Password?</Link>
+        </div>
+
+        <button onClick={handleLogin}>Login</button>
+
+        <p className="auth-link">
+          Don't have an account? <Link to="/register">Register</Link>
+        </p>
+      </div>
     </div>
   );
 }

@@ -1,11 +1,15 @@
 // controllers/authController.js
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { User } from '../models/index.js'; // Or wherever your User model is
+import { User } from '../models/index.js';
 
 export const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
+
+    if (!username || !email || !password) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
 
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
@@ -20,10 +24,11 @@ export const register = async (req, res) => {
       user: {
         id: user.id,
         username: user.username,
-        email: user.email
-      }
+        email: user.email,
+      },
     });
   } catch (err) {
+    console.error('❌ Registration Error:', err.message);
     res.status(400).json({ error: err.message });
   }
 };
@@ -31,17 +36,20 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ where: { email } });
 
-    if (!user || !(await bcrypt.compare(password, user.password))) {
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign(
-      { id: user.id },
-      process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRES_IN || '1d' }
-    );
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      expiresIn: '1d',
+    });
 
     res.json({
       message: 'Login successful',
@@ -49,10 +57,11 @@ export const login = async (req, res) => {
       user: {
         id: user.id,
         username: user.username,
-        email: user.email
-      }
+        email: user.email,
+      },
     });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('❌ Login Error:', err.message);
+    res.status(500).json({ error: 'Login failed' });
   }
 };

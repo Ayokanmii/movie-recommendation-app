@@ -1,0 +1,167 @@
+.profile-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #1c1c1e, #121212); /* Matches Home.css */
+  color: #f5f5f7; /* White text */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Matches Home.css */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3)); /* Matches Home.css */
+}
+
+.profile-container h2 {
+  font-size: 2rem; /* Matches Settings.css */
+  color: #f5f5f7;
+  margin-bottom: 1.5rem;
+}
+
+.profile-card {
+  background: #2a2a2e; /* Matches Watchlist/Settings card */
+  border-radius: 8px;
+  padding: 1.5rem;
+  max-width: 500px; /* Matches Settings.css */
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Matches Home.css buttons */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profile-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.profile-item strong {
+  font-size: 1.1rem;
+  color: #f5f5f7;
+}
+
+.profile-item p {
+  font-size: 1rem;
+  color: #cccccc; /* Matches Home.css paragraph */
+  margin: 0;
+}
+
+.profile-input,
+.profile-textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  background: #3a3a3e;
+  color: #f5f5f7;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+}
+
+.profile-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.genre-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.genre-label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #cccccc;
+  font-size: 0.9rem;
+}
+
+.genre-label input {
+  accent-color: #ff4c4c; /* Red checkbox to match theme */
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.action-btn,
+.settings-link {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease; /* Matches Home.css */
+}
+
+.action-btn {
+  background-color: #ff4c4c; /* Matches Home.css buttons */
+  color: #f5f5f7;
+}
+
+.action-btn:hover {
+  background-color: #e33c3c; /* Matches Home.css hover */
+  transform: scale(1.02);
+}
+
+.settings-link {
+  background-color: #2a2a2e; /* Matches card background */
+  color: #ff4c4c; /* Red text */
+  border: 2px solid #ff4c4c;
+}
+
+.settings-link:hover {
+  background-color: #ff4c4c;
+  color: #f5f5f7;
+  transform: scale(1.02);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .profile-container {
+    padding: 1rem;
+  }
+
+  .logo {
+    width: 90px; /* Matches Home.css */
+  }
+
+  .profile-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .profile-card {
+    padding: 1rem;
+  }
+
+  .profile-item strong {
+    font-size: 1rem;
+  }
+
+  .profile-item p,
+  .profile-input,
+  .profile-textarea {
+    font-size: 0.9rem;
+  }
+
+  .action-btn,
+  .settings-link {
+    width: 100%; /* Full-width buttons on mobile */
+    padding: 0.6rem;
+  }
+}

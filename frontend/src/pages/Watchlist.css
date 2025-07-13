@@ -1,0 +1,79 @@
+.watchlist-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #1c1c1e, #121212); /* Matches Home.css gradient */
+  color: #f5f5f7; /* White text for readability */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Matches Home.css */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.watchlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px; /* Limits grid width for large screens */
+  margin: 2rem auto; /* Centers grid and adds spacing */
+}
+
+.movie-card {
+  background: #2a2a2e; /* Slightly lighter than background for contrast */
+  padding: 1rem;
+  border-radius: 8px; /* Slightly tighter radius for a modern look */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Matches Home.css button shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smoother transition */
+}
+
+.movie-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(255, 76, 76, 0.3); /* Red glow to match Home.css buttons */
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px; /* Slightly smaller radius for images */
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); /* Subtle glow like logo */
+}
+
+.movie-card h3 {
+  margin: 0.5rem 0 0.3rem;
+  font-size: 1.2rem; /* Slightly larger for emphasis */
+  color: #f5f5f7; /* Matches Home.css text */
+  font-weight: bold;
+}
+
+.movie-card p {
+  margin: 0.3rem 0;
+  color: #cccccc; /* Matches Home.css paragraph text */
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.movie-card p::before {
+  content: '⭐ '; /* Star icon for ratings */
+  color: #ff4c4c; /* Red to match Home.css buttons */
+}
+
+/* Responsive adjustments to match Home.css */
+@media (max-width: 600px) {
+  .watchlist-container {
+    padding: 1rem;
+  }
+
+  .watchlist-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1rem auto;
+  }
+
+  .movie-card h3 {
+    font-size: 1rem;
+  }
+
+  .movie-card p {
+    font-size: 0.8rem;
+  }
+}

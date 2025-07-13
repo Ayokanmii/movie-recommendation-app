@@ -1,47 +1,47 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import './Auth.css';
+import { Link, useNavigate } from 'react-router-dom';
+import './Register.css';
 
-function Login() {
+function Register() {
+  const [username, setUsername] = useState(''); // ✅ Add this
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    setMessage('');
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, { email, password });
-      localStorage.setItem('token', res.data.token);
-      setMessage('✅ Login successful');
+      setError('');
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email, password }), // ✅ Include username
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Registration failed');
+      navigate('/login');
     } catch (err) {
-      setMessage('❌ Login failed: ' + (err.response?.data?.message || 'Something went wrong'));
+      setError(err.message);
     }
   };
 
   return (
-    <div className="auth-container">
-      <h2>🔐 Sign in with Email</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Enter password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
-      {message && <p className="status-message">{message}</p>}
+    <div className="auth-page">
+      <div className="auth-box">
+        <h2>Register</h2>
+        {error && <p className="error">{error}</p>}
+        <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button onClick={handleRegister}>Register</button>
+        <p>
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
+      </div>
     </div>
   );
 }
 
-export default Login;
+export default Register;

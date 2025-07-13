@@ -1,50 +1,232 @@
-.auth-container {
+/* auth.css */
+
+/* Global Styles for Authentication Pages */
+.auth-page {
+  background-color: #141414; /* Dark movie-themed background */
+  color: #fff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #121212;
-  color: white;
-  padding: 2rem;
+  font-family: 'Arial', sans-serif;
 }
 
-.auth-container h2 {
-  margin-bottom: 1.5rem;
+/* Authentication Box (Form Container) */
+.auth-box {
+  background-color: #1e1e1e; /* Slightly lighter for depth */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Logo Styles */
+.auth-box .logo {
+  max-width: 150px;
+  margin-bottom: 20px;
+}
+
+/* Heading Styles */
+.auth-box h2 {
   font-size: 2rem;
+  margin-bottom: 20px;
 }
 
-form {
+/* Form Styles */
+.auth-box form {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  gap: 1rem;
 }
 
-input {
-  padding: 0.75rem;
-  border: none;
-  border-radius: 6px;
+/* Label Styles */
+.auth-box label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+/* Input Styles */
+.auth-box input {
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #000;
   font-size: 1rem;
 }
 
-button {
-  padding: 0.75rem;
-  background-color: #ff4c4c;
+.auth-box input:focus {
+  outline: none;
+  border-color: #e50914; /* Red accent on focus */
+  box-shadow: 0 0 5px rgba(229, 9, 20, 0.5);
+}
+
+.auth-box input::placeholder {
+  color: #999;
+}
+
+/* Button Styles */
+.auth-box button {
+  padding: 12px;
+  background-color: #e50914; /* Red accent */
+  color: #fff;
   border: none;
-  color: white;
-  font-size: 1rem;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s, transform 0.1s;
+  font-size: 1rem;
 }
 
-button:hover {
-  background-color: #e53935;
+.auth-box button:hover {
+  background-color: #c40812; /* Darker red on hover */
 }
 
-.status-message {
-  margin-top: 1rem;
-  font-weight: bold;
-  color: #ffd700;
+.auth-box button:active {
+  transform: scale(0.98); /* Slight press effect */
+}
+
+.auth-box button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+/* Remember Me and Forgot Password */
+.auth-box .remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.auth-box .remember-forgot label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.auth-box .remember-forgot input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.auth-box .remember-forgot a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.auth-box .remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+/* Sign Up Link */
+.auth-box .signup-link {
+  margin-top: 20px;
+}
+
+.auth-box .signup-link p {
+  font-size: 0.9rem;
+}
+
+.auth-box .signup-link a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.auth-box .signup-link a:hover {
+  text-decoration: underline;
+}
+
+/* Error Message Styles */
+.auth-box .error-message {
+  color: #ff4d4d; /* Red for errors */
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* Loading Spinner */
+.loader {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.loader.active {
+  display: flex;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #e50914; /* Red accent */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Footer Styles */
+.auth-footer {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.auth-footer a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .auth-box {
+    padding: 20px;
+  }
+
+  .auth-box h2 {
+    font-size: 1.5rem;
+  }
+
+  .auth-box input {
+    padding: 10px;
+  }
+
+  .auth-box button {
+    padding: 10px;
+  }
+
+  .auth-box .remember-forgot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .auth-box .remember-forgot a {
+    margin-top: 10px;
+  }
 }

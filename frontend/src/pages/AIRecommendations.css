@@ -1,65 +1,183 @@
-.ai-page {
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+.ai-recommendations-container {
   min-height: 100vh;
-  color: white;
+  background: linear-gradient(to bottom right, #1c1c1e, #121212); /* Matches Home.css */
+  color: #f5f5f7; /* White text */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Matches Home.css */
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.ai-box {
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 3rem;
-  border-radius: 16px;
-  max-width: 500px;
-  width: 100%;
   text-align: center;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
-.ai-box h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.ai-box p {
-  font-size: 1rem;
+.logo {
+  width: 120px;
+  height: auto;
   margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3)); /* Matches Home.css */
 }
 
-.ai-box input {
-  padding: 0.75rem;
+.ai-recommendations-container h2 {
+  font-size: 2rem; /* Matches Settings.css */
+  color: #f5f5f7;
+  margin-bottom: 0.5rem;
+}
+
+.intro-text {
+  font-size: 1.2rem;
+  color: #cccccc; /* Matches Home.css paragraph */
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
   width: 100%;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: none;
-  margin-bottom: 1rem;
+  max-width: 500px;
 }
 
-.ai-box button {
+.input-container input {
+  padding: 0.75rem;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  background: #3a3a3e; /* Dark input field */
+  color: #f5f5f7;
+  font-size: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-container input:focus {
+  outline: none;
+  border-color: #ff4c4c; /* Red focus ring */
+  box-shadow: 0 0 5px rgba(255, 76, 76, 0.3);
+}
+
+.input-container input.input-error {
+  border-color: #ff4c4c;
+  background: #4a2a2e; /* Subtle red tint for error */
+}
+
+.recommend-btn {
   padding: 0.75rem 1.5rem;
-  background-color: #ff4c4c;
-  color: white;
+  background-color: #ff4c4c; /* Matches Home.css buttons */
+  color: #f5f5f7;
   border: none;
   border-radius: 8px;
-  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.ai-box button:hover {
-  background-color: #e03d3d;
+.recommend-btn:hover:not(:disabled) {
+  background-color: #e33c3c; /* Matches Home.css hover */
+  transform: scale(1.02);
+}
+
+.recommend-btn:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .result-box {
-  background-color: #1e1e1e;
-  margin-top: 2rem;
+  background: #2a2a2e; /* Matches Profile/Settings card */
+  border-radius: 8px;
   padding: 1.5rem;
-  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Matches Home.css buttons */
+  animation: fadeIn 0.5s ease-in;
 }
 
 .result-box h3 {
-  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  color: #f5f5f7;
+  margin-bottom: 1rem;
+}
+
+.recommendation-line {
+  font-size: 1rem;
+  color: #cccccc;
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.watchlist-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  background-color: #2a2a2e;
+  color: #ff4c4c;
+  border: 2px solid #ff4c4c;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.watchlist-link:hover {
+  background-color: #ff4c4c;
+  color: #f5f5f7;
+  transform: scale(1.02);
+}
+
+.error-message {
+  color: #ff4c4c;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .ai-recommendations-container {
+    padding: 1rem;
+  }
+
+  .logo {
+    width: 90px; /* Matches Home.css */
+  }
+
+  .ai-recommendations-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .intro-text {
+    font-size: 1rem;
+  }
+
+  .input-container input,
+  .recommend-btn,
+  .watchlist-link {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+    width: 100%;
+  }
+
+  .result-box {
+    padding: 1rem;
+  }
+
+  .result-box h3 {
+    font-size: 1.3rem;
+  }
+
+  .recommendation-line {
+    font-size: 0.9rem;
+  }
 }

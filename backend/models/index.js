@@ -1,26 +1,18 @@
-import { Sequelize } from 'sequelize';
-import dotenv from 'dotenv';
-import createWatchlistModel from './watchlist.js';
-import createUserModel from './user.js';
+// models/index.js
+import sequelize from './sequelize.js';
+import User from './user.js';
+import Watchlist from './watchlist.js'; // ✅ Add this line
 
-dotenv.config();
-
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'postgres',
-  logging: false,
-});
-
-const Watchlist = createWatchlistModel(sequelize);
-const User = createUserModel(sequelize);
-
+// Test DB connection
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log('✅ Database connected ✅');
-    await sequelize.sync();
+    console.log('✅ Database connected');
+    await sequelize.sync(); // Sync models
   } catch (error) {
     console.error('❌ Unable to connect to the database:', error);
   }
 })();
 
-export { sequelize, Watchlist, User };
+// ✅ Export all models
+export { User, Watchlist, sequelize };

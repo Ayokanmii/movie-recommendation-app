@@ -1,28 +1,65 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Import pages
+// Pages
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword'; // ✅ New
 import Watchlist from './pages/Watchlist';
 import AIRecommendations from './pages/AIRecommendations';
+import Profile from './pages/Profile';
+import Settings from './pages/Settings';
 
-// Optional: import a global stylesheet
-import './App.css';
+// Components
+import Navbar from './components/Navbar';       
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/watchlist" element={<Watchlist />} />
-          <Route path="/ai" element={<AIRecommendations />} />
-        </Routes>
-      </div>
+      <Navbar />
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} /> {/* ✅ Added */}
+
+        {/* Protected Routes */}
+        <Route
+          path="/watchlist"
+          element={
+            <PrivateRoute>
+              <Watchlist />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/ai"
+          element={
+            <PrivateRoute>
+              <AIRecommendations />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
     </Router>
   );
 }
