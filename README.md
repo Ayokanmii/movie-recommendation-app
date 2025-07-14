@@ -1,35 +1,79 @@
+# 🎬 WatchWise - AI Movie Recommender App
 
-# Damilola Movie Finder
+**Built by Olatunji Ayokanmi Damilola**  
+3MTT Fellow ID: 23/81109828  
+Submission for the **3MTT July Knowledge Showcase**
 
-Author: Olatunji Ayokanmi  
-Email: olatunjiayokanmii@gmail.com  
+---
 
-## Description
-A full-stack movie recommendation app using React, Node.js, Express, Sequelize, and PostgreSQL. It supports user registration, login, movie search via TMDb, and a user watchlist.
+## 🚀 Overview
 
-## Features
-- User Authentication (JWT)
-- Movie Search via TMDb
-- Watchlist Management
-- PostgreSQL Database Integration
+**WatchWise** is an AI-powered movie recommendation platform that helps users discover movies based on mood, genre, or keywords — powered by **OpenAI's GPT**.
 
-## Setup
+It also features:
 
-### Backend
-- `cd backend`
-- `npm install`
-- Rename `.env.example` to `.env` and configure your DB + secret
-- `node index.js`
+- 🔐 Secure login & JWT-based authentication
+- ⭐ Personalized watchlist
+- 🧑‍💻 Profile & settings management
+- 💡 AI-generated movie suggestions
 
-### Frontend
-- `cd frontend`
-- `npm install`
-- Rename `.env.example` to `.env` and configure TMDb key
-- `npm start`
+---
 
-## Deployment
-- Frontend: Vercel or Netlify
-- Backend: Render or Railway
+## 🧠 Why This Project?
 
-## License
-MIT
+> Finding a movie to watch can be frustrating and time-consuming. WatchWise solves this by leveraging AI to deliver instant, tailored suggestions — making movie night easier and smarter.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React.js, CSS
+- **Backend**: Node.js, Express.js
+- **Database**: PostgreSQL (with Sequelize ORM)
+- **AI Integration**: OpenAI (via OpenRouter)
+- **Authentication**: JWT
+- **Hosting**: 
+  - Frontend: Netlify (Planned)
+  - Backend: Cyclic (Planned)
+
+---
+
+## 🔍 Key Features
+
+| Feature | Description |
+|--------|-------------|
+| 🔐 Auth | Secure Register/Login using JWT |
+| 🤖 AI Recommender | Suggest movies using natural language |
+| ⭐ Watchlist | Save & manage favorite movies |
+| ⚙️ Settings/Profile | Update personal info |
+| 🧑 Responsive Design | Fully mobile-ready layout |
+
+---
+
+> Screens and walkthrough available in the [Demo Video](#-demo-video)
+
+---
+
+## 🎥 Demo Video
+
+🎬 [Watch the Demo Video Here](https://loom.com/your-final-link-here)  
+👉 *Video shows AI in action, login flow, and app navigation.*
+
+---
+
+## 💻 Run Locally
+
+```bash
+# Clone this repo
+git clone https://github.com/Ayokanmii/movie-recommendation-app.git
+cd movie-recommendation-app
+
+# Backend
+cd backend
+npm install
+npm run start
+
+# Frontend (in another terminal)
+cd frontend
+npm install
+npm run start
