@@ -56,7 +56,7 @@ It also features:
 
 ## 🎥 Demo Video
 
-🎬 [Watch the Demo Video Here](https://loom.com/your-final-link-here)  
+🎬 [Watch the Demo Video Here]   https://youtu.be/jYt-fKd6vp0
 👉 *Video shows AI in action, login flow, and app navigation.*
 
 ---
